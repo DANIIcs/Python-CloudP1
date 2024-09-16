@@ -26,7 +26,7 @@ Creamos un archivo en vscode de python con los sigueintes comandos
     cdk init app --language python
    ```
 
-Ajustamos el codigo de tal manera que utilice las credenciales y tenaga los roles establecidos para que pueda abirir los puertos 8080 y 8081
+Ajustamos el codigo de tal manera que utilice las credenciales y tenga los roles establecidos para que pueda abirir los puertos 8080 y 8081
 
 Usamos los siguietes comando para deployar
 
