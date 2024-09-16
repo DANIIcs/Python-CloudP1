@@ -1,58 +1,49 @@
+# Proyecto 1 de Cloud computing (Pyhton)
 
-# Welcome to your CDK Python project!
+## Pasos a seguir:
 
-This is a blank project for CDK development with Python.
+Inicializamos el aws
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+Guadamos las credenciales en el directorio de .aws con el siguiente comando 
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+   ```bash
+   notepad $env:USERPROFILE.aws\credentials
+   ```
 
-To manually create a virtualenv on MacOS and Linux:
+Creamos un nuveo bucket 
+![](./images/1.png)
 
-```
-$ python -m venv .venv
-```
+Buscamos nuestra id del AMI
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+Buscamos tambien la id del panel VPC
+![](./images/2.png)
 
-```
-$ source .venv/bin/activate
-```
 
-If you are a Windows platform, you would activate the virtualenv like this:
+Creamos un archivo en vscode de python con los sigueintes comandos 
 
-```
-% .venv\Scripts\activate.bat
-```
+   ```bash
+    pip install aws-cdk-lib
 
-Once the virtualenv is activated, you can install the required dependencies.
+    cdk init app --language python
+   ```
 
-```
-$ pip install -r requirements.txt
-```
+Ajustamos el codigo de tal manera que utilice las credenciales y tenaga los roles establecudos para que pueda abirir los puertos 8080 y 8081
 
-At this point you can now synthesize the CloudFormation template for this code.
+Usamos los siguietes comando para deployar
 
-```
-$ cdk synth
-```
+   ```bash
+   aws ssm put-parameter --name "/cdk-bootstrap/hnb659fds/version" --type "String" --value "15" --overwrite
 
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
+   cdk deploy
+   ```
 
-## Useful commands
+Comporbamos que se haya deployado una nueva instancia en nuestro ec2
+![](./images/3.png)
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
 
-Enjoy!
+Uilizamos el id de esta instancia y comprobamos con los puertos establecidos
+
+![](./images/4.png)
+![](./images/5.png)
+
+
